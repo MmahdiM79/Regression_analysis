@@ -21,20 +21,22 @@ def D_ij(i: int, j: int) -> int:
 if __name__ == '__main__':
 
     btcusdt_chart = np.load('btc_price.npy')
+    n = len(btcusdt_chart)
 
 
-    y = np.zeros(shape=btcusdt_chart.shape)
+    y = np.reshape(btcusdt_chart, (n, 1))
 
-    D = np.array([[D_ij(i, j) for j in range(len(y))] for i in range(len(y)-1)])
+    D = np.array([[D_ij(i, j) for j in range(n)] for i in range(n-1)])
 
     landa = 1000.0 
     D = D * sqrt(landa)
-    print(D, '\n\n')
 
-    A = np.array([[1 if i == j else 0 for j in range(len(y))] for i in range(len(y))])
+    A = np.array([[1 if i == j else 0 for j in range(n)] for i in range(n)])
     A = np.vstack((A, D))
 
-    print(A)
+
+    Y = np.vstack((y, np.zeros(shape=(n, 1))))
+
 
 
 
