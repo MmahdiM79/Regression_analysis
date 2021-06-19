@@ -35,7 +35,12 @@ if __name__ == '__main__':
     A = np.vstack((A, D))
 
 
-    Y = np.vstack((y, np.zeros(shape=(n, 1))))
+    Y = np.vstack((y, np.zeros(shape=(n-1, 1))))
+
+    A_t = np.transpose(A)
+
+    to_solve = np.hstack((np.matmul(A_t, A), np.matmul(A_t, Y)))
+
 
 
 
